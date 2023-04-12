@@ -1,6 +1,13 @@
+---
+title: "[Swift] API DESIGN GUIDELINES - Naming"
+categories:
+  - SwiftUI
+---
+
 # [Swift] API DESIGN GUIDELINES - Naming
 
 [Swift API DESIGN GUIDELINES](https://www.swift.org/documentation/api-design-guidelines/#naming) 참고
+
 > - Promote Clear Usage (명확하게 사용하기)
 > - Strive for Fluent Usage (자연스러운 사용을 위해 노력하기)
 > - Use Terminology Well (적절한 기술 용어 사용하기)
