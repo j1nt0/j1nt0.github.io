@@ -1,5 +1,5 @@
 ---
-title: "[SwiftUI] Custom Tab Bar
+title: "[SwiftUI] Custom Tab Bar"
 
 categories:
   - SwiftUI
