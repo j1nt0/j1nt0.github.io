@@ -10,8 +10,6 @@ date: 2023-03-20
 last_modified_at: 2023-03-20
 ---
 
-# [Swift] API DESIGN GUIDELINES - Naming
-
 [Swift API DESIGN GUIDELINES](https://www.swift.org/documentation/api-design-guidelines/#naming) 참고
 
 > - Promote Clear Usage (명확하게 사용하기)
