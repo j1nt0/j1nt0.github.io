@@ -24,6 +24,7 @@ last_modified_at: 2023-03-20
 ## • Promote Clear Usage (명확하게 사용하기)
 - **Include all the words needed to avoid ambiguity**
 (모호함을 피하기 위해 모든 단어를 포함한다.)
+
 ```swift
 ✅
 extension List {
@@ -31,20 +32,24 @@ extension List {
 }
 employees.remove(at: x)
 ```
+
 ```swift
 ⛔️
 employees.remove(x) // unclear: are we removing x?
 ```
+
 `at` 이라는 단어를 생략한다면 x의 쓰임을 분명하게 알 수 없다.
 
 - **Omit needless words**
 (불필요한 단어는 생락한다.)
+
 ```swift
 ⛔️
 public mutating func removeElement(_ member: Element) -> Element?
 
 allViews.removeElement(cancelButton)
 ```
+
 ```swift
 ✅
 public mutating func remove(_ member: Element) -> Element?
@@ -52,6 +57,7 @@ public mutating func remove(_ member: Element) -> Element?
 allViews.remove(cancelButton) // clearer
 ```
 분명한 의도를 위해 더 많은 단어가 필요할 수 있지만, 읽는 사람이 이미 알고 있는 **중복**되는 정보는 생략한다.
+
 ```swift
 ⛔️
 func setIntToString(setInt: Set<Int>) -> String {
@@ -62,6 +68,7 @@ func setIntToString(setInt: Set<Int>) -> String {
     return string
 }
 ```
+
 ```swift
 ✅
 func convertToString(from numbers: Set<Int>) -> String {
@@ -75,6 +82,7 @@ func convertToString(from numbers: Set<Int>) -> String {
 ## • Strive for Fluent Usage (자연스러운 사용을 위해 노력하기)
 - **Prefer method and function names that make use sites form grammatical English phrases.**
 (사용되는 메서드와 함수의 이름은 영어 문법에 맞는 구가 되는 것이 좋다.)
+
 ```swift
 ✅
 x.insert(y, at: z)          “x, insert y at z”
@@ -103,6 +111,7 @@ Don’t say “epidermis” if “skin” will serve your purpose.
 "피부" 로 의미가 전달된다면 "표피" 로 말하지 않는다.
 - **Avoid abbreviations.**
 (축약어는 피한다.)
+
 ```swift
 ⛔️
 var randomNum: Int
