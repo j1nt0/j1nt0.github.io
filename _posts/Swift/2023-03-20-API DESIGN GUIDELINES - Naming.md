@@ -1,6 +1,5 @@
 ---
-​---
-title:  "[Swift] API DESIGN GUIDELINES - Naming"
+title: "[Swift] API DESIGN GUIDELINES - Naming"
 
 categories:
   - Swift
@@ -9,10 +8,9 @@ tags:
 
 toc: true
 toc_sticky: true
- 
+
 date: 2023-03-20
 last_modified_at: 2023-03-20
-​---
 ---
 
 # [Swift] API DESIGN GUIDELINES - Naming
