@@ -1,11 +1,12 @@
 # main links
 main:
   - title: "Quick-Start Guide"
-  icon: "fas fa-fw fa-link"
+  #icon: "fas fa-fw fa-link"
   url: /year-archive/
   #   url: https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/
-  # - title: "About"
-  #   url: https://mmistakes.github.io/minimal-mistakes/about/
+  - title: "About"
+  icon: "fas fa-fw fa-link"
+  url: https://mmistakes.github.io/minimal-mistakes/about/
   # - title: "Sample Posts"
   #   url: /year-archive/
   # - title: "Sample Collections"
