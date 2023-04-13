@@ -3,4 +3,4 @@ title: "About"
 permalink: /about/
 ---
 
-안녕하세요🐶
+<center>안녕하세요🐶</center>
