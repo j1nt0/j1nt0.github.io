@@ -1,7 +1,10 @@
-# (2023-04-14)
+---
+title: "About"
+permalink: /about/
+---
 
 ### 사용 스택
 
-`<Badge text="Swift" type="warn"/>`
+<Badge text="Swift" type="warn"/>
 
-`<Badge text="SwiftUI" type="tip" />`
+<Badge text="SwiftUI" type="tip" />
