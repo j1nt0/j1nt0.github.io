@@ -1,15 +1,19 @@
 # main links
 main:
   - title: "About"
-    url: https://mmistakes.github.io/minimal-mistakes/about/
+    url: /about/
   - title: "Posts"
     url: /year-archive/
-  - title: "Collections"
-    url: /collection-archive/
-  - title: "Sitemap"
-    url: /sitemap/
-  - title: "Extra Menu Item 1"
-    url: /
-  - title: "/assets/images/avatar.png"
-    url: /
+#  - title: "About"
+#    url: https://mmistakes.github.io/minimal-mistakes/about/
+#  - title: "Posts"
+#    url: /year-archive/
+#  - title: "Collections"
+#    url: /collection-archive/
+#  - title: "Sitemap"
+#    url: /sitemap/
+#  - title: "Extra Menu Item 1"
+#    url: /
+#  - images: "/assets/images/avatar.png"
+#    url: /
 
