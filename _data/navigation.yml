@@ -4,13 +4,3 @@ main:
     url: /about/
   - title: "Posts"
     url: /year-archive/
-#  - title: "About"
-#    url: https://mmistakes.github.io/minimal-mistakes/about/
-#  - title: "Posts"
-#    url: /year-archive/
-#  - title: "Collections"
-#    url: /collection-archive/
-#  - title: "Sitemap"
-#    url: /sitemap/
-#  - title: "Extra Menu Item 1"
-#    url: /
