@@ -1,6 +1,6 @@
 ---
 title: "About"
 permalink: /about/
+header:
+  overlay_image: /assets/images/headerImage.jpg
 ---
-
-<center>안녕하세요🐶</center>
