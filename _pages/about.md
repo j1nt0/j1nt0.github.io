@@ -1,9 +1,10 @@
 ---
 title: "About"
 permalink: /about/
-header:
-header:
-  overlay_image: /assets/images/headerImage.jpg
-  og_image: /assets/images/headerImage.jpg
+
   
 ---
+
+프로필
+{: .notice}
+<H3>이진</H3>
