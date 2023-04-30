@@ -1,29 +1,25 @@
 ---
 title: "About"
 permalink: /about/
-
+layout: single
   
 ---
-<div style="padding:60px">
 
-<h2>🍀 Profile</h2>
+## 🍀 Profile
+### 이 진
+iOS 엔지니어를 꿈꾸며 오늘도 한걸음 나아갑니다!
+애플의 디자인 철학을 좋아하며 
 
-<h3>이 진</h3>
-iOS 엔지니어를 꿈꾸며 오늘도 한걸음 나아갑니다!<br>
-제가 만들어 갈 코드 한 줄의 힘을 믿습니다.
-
-<h2>🎓 Education</h2> 
+## 🎓 Education
 
 
-<h2>🎞 Career</h2>
+## 🎞 Career
 
 
-<h2>🎯 Skill</h2>
+## 🎯 Skill
 
 
-<h2>🚀 Projects</h2>
+## 🚀 Projects
 
 
-<h2>🎒 Activities</h2>
-
-</div>
+## 🎒 Activities
