@@ -5,12 +5,6 @@ permalink: /about/
   
 ---
 
-<style type='text/css'>
-[class*="full"] { padding: 80px }
-</style>
-
-<div class = "full">
-
 ## 🍀 Profile
 <span style="font-size: large">이 진</span>
 iOS 엔지니어를 꿈꾸며 오늘도 한걸음 나아갑니다!
@@ -29,5 +23,3 @@ permalink: /about/
 
 
 ## 🎒 Activities
-
-</div>
