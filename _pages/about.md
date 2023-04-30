@@ -29,3 +29,5 @@ permalink: /about/
 
 
 ## 🎒 Activities
+
+</div>
