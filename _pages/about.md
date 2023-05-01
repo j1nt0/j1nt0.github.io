@@ -23,6 +23,12 @@ layout: single
 **기타** - html, JS, mySQL, Flutter, MVVM, Git, Github
 
 ## 🚀 Projects
-💊[어프 - 의약품 별 키워드 생성](https://paper-timpani-99f.notion.site/53c7c2c9fb70491d8f495760a5bc3e24)
+- **[어프 - 의약품 별 키워드 생성](https://paper-timpani-99f.notion.site/53c7c2c9fb70491d8f495760a5bc3e24)**
+의약품 데이터를 수집, 의약품 별 주의사항 추출하여 의약품 별 키워드 생성한 프로젝트입니다. python을 사용해 진행하였습니다.
+
+- **[어프 - 의약품 별 키워드 생성](https://paper-timpani-99f.notion.site/53c7c2c9fb70491d8f495760a5bc3e24)**
+의약품 데이터를 수집, 의약품 별 주의사항 추출하여 의약품 별 키워드 생성한 프로젝트입니다. python을 사용해 진행하였습니다.
+
+
 
 ## 🎒 Activities
