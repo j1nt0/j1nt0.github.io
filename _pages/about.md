@@ -23,11 +23,14 @@ layout: single
 **기타** - html, JS, mySQL, Flutter, MVVM, Git, Github
 
 ## 🚀 Projects
-- **[어프 - 의약품 별 키워드 생성](https://paper-timpani-99f.notion.site/53c7c2c9fb70491d8f495760a5bc3e24)**
-    의약품 데이터를 수집, 의약품 별 주의사항 추출하여 의약품 별 키워드 생성한 프로젝트입니다. python을 사용해 진행하였습니다.
+- **[농구 매칭 웹 서비스](https://paper-timpani-99f.notion.site/13df854958a5490c823deefc2d228296)**
+ 실시간 현재 위치를 표시하고 온라인으로 상대와 농구시합을 매칭하는 웹 서비스입니다. html, JS, Firebase를 사용해 진행하였습니다.
 
 - **[어프 - 의약품 별 키워드 생성](https://paper-timpani-99f.notion.site/53c7c2c9fb70491d8f495760a5bc3e24)**
     의약품 데이터를 수집, 의약품 별 주의사항 추출하여 의약품 별 키워드 생성한 프로젝트입니다. python을 사용해 진행하였습니다.
+
+- **[XAM](https://paper-timpani-99f.notion.site/XAM-5702449e42264762a7a84a058eb0e66d)**
+    틀에 갇히지 않는 형식에 자유로운 포트폴리오 어플을 기획하였습니다. Flutter를 사용해 구현하고자 하였습니다. 본 프로젝트로 서경대학교 창업경진대회 총장상을 수상하였습니다.
 
 
 
