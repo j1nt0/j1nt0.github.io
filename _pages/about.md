@@ -34,7 +34,7 @@ layout: single
 - **[XAM](https://paper-timpani-99f.notion.site/XAM-5702449e42264762a7a84a058eb0e66d)**
     - 틀에 갇히지 않는 형식에 자유로운 포트폴리오 어플을 기획하였습니다. Flutter를 사용해 구현하고자 하였습니다. 본 프로젝트로 서경대학교 창업경진대회 총장상을 수상하였습니다.
 
-- **[현재 버스 위치확인 서비스](https://paper-timpani-99f.notion.site/ac972aa3922847dc8163b93bf245d0ea)**
+- **[실시간 버스 위치확인 서비스](https://paper-timpani-99f.notion.site/ac972aa3922847dc8163b93bf245d0ea)**
 
 ## 🎒 Activities
 - **[딥러닝 스터디](https://paper-timpani-99f.notion.site/d15420201f6641efadef80c6e143ea83)**
