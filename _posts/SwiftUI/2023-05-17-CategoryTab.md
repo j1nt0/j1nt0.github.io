@@ -13,122 +13,54 @@ date: 2023-05-17
 last_modified_at: 2023-05-17
 ---
 
-앱을 개발하다 보면 각 개체를 성질 혹은 항목에 따라 분류하는 탭이 필요할 때가 있습니다.
+앱을 개발하다 보면 각 개체를 성질 혹은 항목에 따라 분류하는 탭이 필요할 때가 있습니다.<br>
 예를 들어 상점 앱을 구현할 때에 각 상점은 카테고리를 갖고 이를 아래와 같이 분류할 수 있을 겁니다.
 
+![예시 이미지](https://github.com/j1nt0/SwiftUI-Basic/assets/124751277/59d6ec6a-27ba-4ba5-b339-1041d7026bd7)
 
-
-사용한 Firebase의 데이터는 아래와 같습니다.
-<img width="1132" alt="스크린샷 2023-04-29 오전 1 25 22" src="https://user-images.githubusercontent.com/124751277/235202166-51e86a24-73e2-4f9d-8179-432558f28600.png">
-
-## • Model
-상점들의 데이터를 담으므로 `Store.swift` 파일을 생성합니다.
-
+이를 구현하기 위해 다음과 같은 카테고리와 데이터를 사용하였습니다.<br>
 ```swift
-// Store.swift
-import Foundation
+enum Category: String {
+    case a = "전체"
+    case b = "한식"
+    case c = "중식"
+    case d = "패스트푸드"
+    case e = "아시안"
+    case f = "분식"
+    case g = "카페"
+}
 
-struct Store: Identifiable {
-    
-    var id: String
+struct Store {
     var name: String
-    var number: String
-    var address: String
-    var category: String
-    var menu: Dictionary<String, Int>
-    var operatingHour: Dictionary<String, String>
-    var position: Array<Double>
-    
+    var category: Category
 }
+
+var stores: [Store] = [
+    Store(name: "민들레한정식", category: .b),
+    Store(name: "자금성", category: .c),
+    Store(name: "햇볕팟타이", category: .e),
+    Store(name: "미란다짬뽕", category: .c),
+    Store(name: "우리동네떡볶이", category: .f),
+    Store(name: "곰돌카페", category: .g),
+    Store(name: "뜨거마라탕", category: .c)
+]
 ```
-Firebase에서 저장한 데이터들을 Model에서 구조화합니다.
 
-Store의 인스턴스를 생성할 경우, 각각의 개체를 구별하기 위해 **Identifiable 프로토콜**을 추가해줍니다.
-**Identifiable 프로토콜**은 id가 필수이며 id는 문서 추가 시 배정되는 ID값을 사용하게 됩니다.
-
-또한 Firebase의 `맵`타입과 `배열`타입은 Swift에서 각각 `Dictionary`타입과 `Array`타입으로 사용합니다.
-
-## • ViewModel
-데이터를 처리할 `ViewModel.swift` 파일을 생성합니다.
-
-뷰와 **데이터바인딩**을 수행하기 위해 **ObservableObject 프로토콜**을 추가합니다.
-이후 변수에는 **@Published 속성**으로 관찰 대상 변수를 선언합니다.
+카테고리의 변화를 감지하고 이를 반영하기 위해서는 **상태프로퍼티(State)**가 필요합니다.<br>
+[State Property](https://developer.apple.com/documentation/swiftui/state)는 변화가 생기면 해당 변수의 값을 읽거나 쓸 수 있음을 의미하는 프로퍼티 래퍼입니다.
+- State Property 생성을 위해선 `@State`를 사용하여 선언한다.
+- SwiftUI는 State로 선언된 Property들의 저장소를 관리한다.
+- State Property의 값이 변경되면 View를 다시 렌더링하기 때문에 항상 최신 값을 가진다.
+- 다른 View에서 State Property를 참조하기 위해서는 `@Binding`을 사용해야 한다.
 
 ```swift
-// ViewModel.swift
-import Foundation
-import Firebase
-
-class ViewModel: ObservableObject {
-    
-    @Published var list = [Store]()
-    
-    func getData() {
-        
-        let db = Firestore.firestore()
-        
-        db.collection("shop").getDocuments { snapshot, error in
-            
-            if error == nil {
-                // No errors
-                
-                if let snapshot = snapshot {
-                    
-                    // Update the list property in the main thread
-                    DispatchQueue.main.async {
-                        
-                        self.list = snapshot.documents.map { d in
-                            return Store(id: d.documentID,
-                                         name: d["name"] as? String ?? "",
-                                         number: d["number"] as? String ?? "",
-                                         address: d["address"] as? String ?? "",
-                                         category: d["category"] as? String ?? "",
-                                         menu: d["menu"] as? [String:Int] ?? ["":0],
-                                         operatingHour: d["menu"] as? [String:String] ?? ["":""],
-                                         position: d["position"] as? [Double] ?? [0])
-                        }
-                    }
-                }
-            }
-            else {
-                // Handle the errors
-            }
-        }
-    }
-    
-}
-```
-코드에서 사용된 `DispatchQueue`란 **비동기적 실행**을 위해 사용되는 것인데 조금 더 알아봐야 할 것 같다.
-
-`snapshot`에 데이터를 받아온 후 변수 `list`에 담는 내용이다. `error`를 사용하여 예외처리도 가능하다.
-
-## • View
-```swift
-// ContentView.swift
-import SwiftUI
-import Firebase
-
 struct ContentView: View {
     
-    @ObservedObject var model = ViewModel()
+    // State Property 선언
+    @State var selectedTab: Category = .a
     
     var body: some View {
-        List (model.list) { item in
-            HStack {
-                Text(item.name)
-                    .font(.system(size: 20))
-                Spacer()
-                VStack(alignment: .trailing) {
-                    Text(item.category)
-                    Text(item.address)
-                        .font(.system(size: 15))
-                }
-            }
-        }
-    }
-    
-    init() {
-        model.getData()
+        Text("Hello World")
     }
 }
 
@@ -137,17 +69,389 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
-
 ```
-뷰에서는 앞서 `ObservableObject`을 사용한 객체를 `@ObservedObject` 속성과 함께 선언한다.
-이로써 연결된 데이터가 변경되었을 때 화면을 다시 그릴 수 있게 해준다.  
 
-데이터를 가져오는 것은 `init()`함수를 통해 프로그램 시작과 함께 `getData()`함수를 실행하여 가져온다.
+`ScrollView`를 선언하고 내부에 카테고리 수만큼의 버튼을 생성합니다.<br>
+`.horizontal` 속성을 사용하여 스크롤 방향을 가로로 변경해줍니다.
+```swift
+struct ContentView: View {
+    
+    @State var selectedTab: Category = .a
+    
+    var body: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 40) {
+                Button {
+                    
+                } label: {
+                    Text("전체")
+                }
+                Button {
+                    
+                } label: {
+                    Text("한식")
+                }
+                Button {
+                    
+                } label: {
+                    Text("중식")
+                }
+                Button {
+                    
+                } label: {
+                    Text("패스트푸드")
+                }
+                Button {
+                    
+                } label: {
+                    Text("아시안")
+                }
+                Button {
+                    
+                } label: {
+                    Text("분식")
+                }
+                Button {
+                    
+                } label: {
+                    Text("카페")
+                }
+            }
+        }
+    }
+}
+```
+<img width="263" alt="예시 이미지2" src="https://github.com/j1nt0/SwiftUI-Basic/assets/124751277/01c2b368-f1b6-4e6f-853e-ac26d6614bbb">
 
-SwiftUI에서 List를 사용할 때에는 데이터 간 식별이 가능해야 한다.
-즉, `Identifiable` 프로토콜을 사용하지 않는 데이터를 사용할 경우 **런타임 에러**가 발생한다.
-여기서는 앞서 모델에 `Identifiable`을 추가하였기에 `List`를 사용할 수 있다.
+각 버튼을 클릭하면 해당하는 **State**로 변경하게 만들고 선택된 State에 따라 글자 두께와 색깔이 바뀌게 해줍니다. 
+```swift
+struct ContentView: View {
+    
+    @State var selectedTab: Category = .a
+    
+    var body: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 40) {
+                Button {
+                    selectedTab = .a
+                } label: {
+                    Text("전체")
+                        .fontWeight(selectedTab == .a ? .bold : .medium)
+                        .foregroundColor(selectedTab == .a ? .green : .secondary)
+                        .font(.system(size: 20))
+                }
+                Button {
+                    selectedTab = .b
+                } label: {
+                    Text("한식")
+                        .fontWeight(selectedTab == .b ? .bold : .medium)
+                        .foregroundColor(selectedTab == .b ? .green : .secondary)
+                        .font(.system(size: 20))
+                }
+                Button {
+                    selectedTab = .c
+                } label: {
+                    Text("중식")
+                        .fontWeight(selectedTab == .c ? .bold : .medium)
+                        .foregroundColor(selectedTab == .c ? .green : .secondary)
+                        .font(.system(size: 20))
+                }
+                Button {
+                    selectedTab = .d
+                } label: {
+                    Text("패스트푸드")
+                        .fontWeight(selectedTab == .d ? .bold : .medium)
+                        .foregroundColor(selectedTab == .d ? .green : .secondary)
+                        .font(.system(size: 20))
+                }
+                Button {
+                    selectedTab = .e
+                } label: {
+                    Text("아시안")
+                        .fontWeight(selectedTab == .e ? .bold : .medium)
+                        .foregroundColor(selectedTab == .e ? .green : .secondary)
+                        .font(.system(size: 20))
+                }
+                Button {
+                    selectedTab = .f
+                } label: {
+                    Text("분식")
+                        .fontWeight(selectedTab == .f ? .bold : .medium)
+                        .foregroundColor(selectedTab == .f ? .green : .secondary)
+                        .font(.system(size: 20))
+                }
+                Button {
+                    selectedTab = .g
+                } label: {
+                    Text("카페")
+                        .fontWeight(selectedTab == .g ? .bold : .medium)
+                        .foregroundColor(selectedTab == .g ? .green : .secondary)
+                        .font(.system(size: 20))
+                }
+            }
+        }
+    }
+}
+```
 
-실행 화면은 다음과 같다.
+<img width="263" alt="예시 이미지3" src="https://github.com/j1nt0/SwiftUI-Basic/assets/124751277/c1f6a0ff-78e1-4085-bb1b-e0c361483cab">
 
-<img width="270" alt="스크린샷 2023-04-29 오전 1 25 22" src="https://user-images.githubusercontent.com/124751277/235210088-1d8e8d84-f108-4eb1-b04f-6e189b8971e1.png">
+위의 코드를 **3개의 View**로 분할하겠습니다. 이 과정에서 앞서 말한 `@Binding`을 사용합니다.<br>
+보기 좋게 정리했을 뿐, 결과는 위와 같습니다.
+```swift
+struct ContentView: View {
+    
+    @State var selectedTab: Category = .a
+    
+    var body: some View {
+        CategoryTabBar(selectedTab: $selectedTab)
+            // 앞쪽에만 padding을 줘, 뒷쪽에는 내용이 이어짐을 예상하게 합니다.
+            .padding(.leading)
+    }
+}
+
+struct CategoryTabBar: View {
+    
+    // @Binding 사용
+    @Binding var selectedTab: Category
+    
+    var body: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 40) {
+                CategoryTabBarButton(tab: .a, selectedTab: $selectedTab)
+                CategoryTabBarButton(tab: .b, selectedTab: $selectedTab)
+                CategoryTabBarButton(tab: .c, selectedTab: $selectedTab)
+                CategoryTabBarButton(tab: .d, selectedTab: $selectedTab)
+                CategoryTabBarButton(tab: .e, selectedTab: $selectedTab)
+                CategoryTabBarButton(tab: .f, selectedTab: $selectedTab)
+                CategoryTabBarButton(tab: .g, selectedTab: $selectedTab)
+            }
+        }
+    }
+}
+
+struct CategoryTabBarButton: View {
+    
+    var tab: Category
+    // @Binding 사용
+    @Binding var selectedTab: Category
+    
+    var body: some View {
+        Button {
+            selectedTab = tab
+        } label: {
+            Text(tab.rawValue)
+                .fontWeight(selectedTab == tab ? .bold : .medium)
+                .foregroundColor(selectedTab == tab ? .green : .secondary)
+                .font(.system(size: 20))
+        }
+    }
+}
+```
+
+카테고리의 선택에 따라 아래 컨텐츠를 변경시키기 위해 `switch case`를 사용하겠습니다.
+```swift
+struct ContentView: View {
+    
+    @State var selectedTab: Category = .a
+    
+    var body: some View {
+        VStack {
+            CategoryTabBar(selectedTab: $selectedTab)
+                .padding(.leading)
+            // 카테고리 선택에 따른 아래 컨텐츠
+            ScrollView(.horizontal, showsIndicators: false) {
+                switch selectedTab {
+                case .a:
+                    Text("a")
+                case .b:
+                    Text("b")
+                case .c:
+                    Text("c")
+                case .d:
+                    Text("d")
+                case .e:
+                    Text("e")
+                case .f:
+                    Text("f")
+                case .g:
+                    Text("g")
+                }
+            }
+        }
+    }
+}
+```
+
+각 case 별로 해당하는 카테고리의 Store만 보여주어야 합니다.<br>
+이를 위해서는 ForEach를 사용하여 하나씩 해당하는 카테고리인지를 확인하고 걸러주는 방법을 사용하겠습니다.<br>  
+당장 ForEach를 사용하게되면 다음과 같은 오류를 마주하게 됩니다.<br>
+`'ForEach' requires that 'Store' conform to 'Identifiable'`<br>
+ForEach를 사용하려는 개체는 `Identifiable` 속성이 요구됩니다. 초반에 생성한 Store 타입에 `Identifiable`을 추가하고 UUID()를 사용하여 각각의 개체에 유일성을 부여합니다.
+```swift
+struct Store: Identifiable {
+    var id = UUID()
+    var name: String
+    var category: Category
+}
+```
+
+카테고리 별로 ForEach를 통과시키게 합니다.<br>
+`case .a:` 즉, "전체" 카테고리의 경우 모든 Store가 표시되고 `다른 case`들은 `if문`을 통해 현재 선택된 State의 값과 같은 카테고리를 갖는 Store만이 표시되게 합니다. 
+```swift
+struct ContentView: View {
+    
+    @State var selectedTab: Category = .a
+    
+    var body: some View {
+        VStack {
+            CategoryTabBar(selectedTab: $selectedTab)
+                .padding(.leading)
+            // 카테고리 선택에 따른 아래 내용란
+            ScrollView(.horizontal, showsIndicators: false) {
+                switch selectedTab {
+                case .a:
+                    HStack {
+                        ForEach(stores) { store in
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 10)
+                                    .frame(width: 100, height: 200)
+                                    .foregroundColor(.green)
+                                Text(store.name)
+                                ZStack {
+                                    Capsule()
+                                        .frame(width: 50, height: 25)
+                                        .foregroundColor(.white)
+                                    Text(store.category.rawValue)
+                                }
+                                .offset(x: 20, y: -80)
+                            }
+                        }
+                    }
+                case .b:
+                    HStack {
+                        ForEach(stores) { store in
+                            if store.category.rawValue == selectedTab.rawValue {
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .frame(width: 100, height: 200)
+                                        .foregroundColor(.green)
+                                    Text(store.name)
+                                    ZStack {
+                                        Capsule()
+                                            .frame(width: 50, height: 25)
+                                            .foregroundColor(.white)
+                                        Text(store.category.rawValue)
+                                    }
+                                    .offset(x: 20, y: -80)
+                                }
+                            }
+                        }
+                    }
+                case .c:
+                    HStack {
+                        ForEach(stores) { store in
+                            if store.category.rawValue == selectedTab.rawValue {
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .frame(width: 100, height: 200)
+                                        .foregroundColor(.green)
+                                    Text(store.name)
+                                    ZStack {
+                                        Capsule()
+                                            .frame(width: 50, height: 25)
+                                            .foregroundColor(.white)
+                                        Text(store.category.rawValue)
+                                    }
+                                    .offset(x: 20, y: -80)
+                                }
+                            }
+                        }
+                    }
+                case .d:
+                    HStack {
+                        ForEach(stores) { store in
+                            if store.category.rawValue == selectedTab.rawValue {
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .frame(width: 100, height: 200)
+                                        .foregroundColor(.green)
+                                    Text(store.name)
+                                    ZStack {
+                                        Capsule()
+                                            .frame(width: 50, height: 25)
+                                            .foregroundColor(.white)
+                                        Text(store.category.rawValue)
+                                    }
+                                    .offset(x: 20, y: -80)
+                                }
+                            }
+                        }
+                    }
+                case .e:
+                    HStack {
+                        ForEach(stores) { store in
+                            if store.category.rawValue == selectedTab.rawValue {
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .frame(width: 100, height: 200)
+                                        .foregroundColor(.green)
+                                    Text(store.name)
+                                    ZStack {
+                                        Capsule()
+                                            .frame(width: 50, height: 25)
+                                            .foregroundColor(.white)
+                                        Text(store.category.rawValue)
+                                    }
+                                    .offset(x: 20, y: -80)
+                                }
+                            }
+                        }
+                    }
+                case .f:
+                    HStack {
+                        ForEach(stores) { store in
+                            if store.category.rawValue == selectedTab.rawValue {
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .frame(width: 100, height: 200)
+                                        .foregroundColor(.green)
+                                    Text(store.name)
+                                    ZStack {
+                                        Capsule()
+                                            .frame(width: 50, height: 25)
+                                            .foregroundColor(.white)
+                                        Text(store.category.rawValue)
+                                    }
+                                    .offset(x: 20, y: -80)
+                                }
+                            }
+                        }
+                    }
+                case .g:
+                    HStack {
+                        ForEach(stores) { store in
+                            if store.category.rawValue == selectedTab.rawValue {
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .frame(width: 100, height: 200)
+                                        .foregroundColor(.green)
+                                    Text(store.name)
+                                    ZStack {
+                                        Capsule()
+                                            .frame(width: 50, height: 25)
+                                            .foregroundColor(.white)
+                                        Text(store.category.rawValue)
+                                    }
+                                    .offset(x: 20, y: -80)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+```
+<img width="263" alt="예시 이미지4" src="https://github.com/j1nt0/SwiftUI-Basic/assets/124751277/8d104b15-a371-4d4d-8843-fa0ddd01c2ac">
