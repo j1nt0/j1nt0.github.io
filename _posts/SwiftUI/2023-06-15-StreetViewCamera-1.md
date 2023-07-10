@@ -4,7 +4,7 @@ title: "[SwiftUI] 사진을 찍지않는 카메라-1"
 categories:
   - SwiftUI
 tags:
-  - [SwiftUI]
+  - [SwiftUI, StreetView Camera]
   
 toc: true
 toc_sticky: true
@@ -66,7 +66,7 @@ struct ContentView: View {
     }
 }
 ```
-<img width="817" alt="스크린샷 2023-06-15 오후 3 45 13" src="https://github.com/j1nt0/j1nt0.github.io/assets/124751277/54b066e4-e930-4d8f-813a-7954c877315d">
+<img width="600" alt="스크린샷 2023-06-15 오후 3 45 13" src="https://github.com/j1nt0/j1nt0.github.io/assets/124751277/54b066e4-e930-4d8f-813a-7954c877315d">
 SwiftUI에서 원하는 위치의 스트리트뷰 이미지를 가져올 수 있게 됐다.
 
 ## ◼︎ 카메라 레이아웃
@@ -153,7 +153,7 @@ struct FlashButton: View {
 ```
 
 ### 3. 리셋 버튼
-카메라를 다시 찍기위해 기존 퍼런 화면 상태로 되돌려 주는 버튼이다. 셔터 버튼의 반대 역할인 `isTakeFicture`을 `false`로 변경한다
+카메라를 다시 찍기위해 기존 퍼런 화면 상태로 되돌려 주는 버튼이다. 셔터 버튼의 반대 역할로 `isTakeFicture`을 `false`로 변경한다
 ```swift
 struct ResetButton: View {
     
@@ -209,6 +209,6 @@ struct GuideLine: View {
 }
 ```
 
-<img width="817" alt="스크린샷 2023-06-15 오후 4 10 50" src="https://github.com/j1nt0/j1nt0.github.io/assets/124751277/4709b8d8-abe7-4271-8957-f79ee67532ad">
+<img width="600" alt="스크린샷 2023-06-15 오후 4 10 50" src="https://github.com/j1nt0/j1nt0.github.io/assets/124751277/4709b8d8-abe7-4271-8957-f79ee67532ad">
 
 다음 포스팅에선 **사용자 위치**를 반영해 같은 위치의 스트리트뷰 이미지를 띄우는 것을 해보겠습니다. 실제 카메라가 바라보는 방향의 이미지를 가져오려면 **방위 데이터**도 함께 반영하는 것이 좋겠습니다. 마지막으로 사진을 저장하는 것도 시도해보겠습니다.  

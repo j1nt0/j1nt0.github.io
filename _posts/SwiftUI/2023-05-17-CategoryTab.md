@@ -527,7 +527,7 @@ struct StoreCardsHStack: View {
 
     }
 }
-``
+```
 
 [전체코드]
 ```swift
