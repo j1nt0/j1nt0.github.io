@@ -80,4 +80,4 @@ MC2는 주변인을 대상으로 “진정한 문제를 **해결**해주자” �
 
 이에 아키텍처를 활용하여 유지 보수에 용이한 코드를 목적으로 리팩토링을 진행하였습니다. 팀원들과 아키텍처 스터디를 진행하였고 MVVM 패턴을 통해 기존 하나의 View를 View와 ViewModel로 분리하였습니다. <br>
 
-[‎KidKit](https://apps.apple.com/kr/app/kidkit/id6587574546)
+앱 스토어 바로가기 - [‎KidKit](https://apps.apple.com/kr/app/kidkit/id6587574546)
