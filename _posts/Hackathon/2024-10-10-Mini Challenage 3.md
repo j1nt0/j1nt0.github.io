@@ -1,13 +1,13 @@
 ---
-title: "[Hackathon] Junction Asia 2024 회고"
+title: "[Hackathon] Mini Challenge 3 회고"
 
 categories:
   - Hackathon
 tags:
   - [Hackathon]
 
-date: 2024-10-23
-last_modified_at: 2024-10-23
+date: 2024-10-22
+last_modified_at: 2024-10-22
 ---
 
 > 안녕하세요, 진토입니다. 날이 추워지는 10월의 중순입니다. 건강 잘 챙기세요.<br>
