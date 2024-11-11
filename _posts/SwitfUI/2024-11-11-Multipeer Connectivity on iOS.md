@@ -1,5 +1,5 @@
 ---
-title: "[SwiftUI] Multipeer Connectivity on iOS 
+title: "[SwiftUI] Multipeer Connectivity on iOS"
 
 categories:
   - SwiftUI
