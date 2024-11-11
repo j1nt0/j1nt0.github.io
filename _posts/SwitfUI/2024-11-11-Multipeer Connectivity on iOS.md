@@ -52,7 +52,7 @@ ex) _(서비스타입)._udp / _(서비스타입)._tcp
 var myPeerID = MCPeerID(displayName: UIDevice.current.name)
 
 // 서비스 타입
-let serviceType = "flashlight" // 서비스 타입은 고유해야 합니다.
+let serviceType = "flashlight"
 
 // 세션, 광고자, 브라우저 초기화
 private var session: MCSession!
@@ -119,14 +119,14 @@ private var device: AVCaptureDevice? {
 // MultipeerManager.swift
 
 extension MultipeerManager: MCSessionDelegate, MCNearbyServiceAdvertiserDelegate, MCNearbyServiceBrowserDelegate {
-        // 명령 처리
+    // 명령 처리
     private func handleReceivedCommand(data: Data) {
         guard let command = data.first else { return }
         let isFlashlightOn = command == 1
         flashlightManager.toggleFlashlight(isOn: isFlashlightOn)
     }
     
-    / 데이터 수신
+    // 데이터 수신
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         DispatchQueue.main.async {
             self.handleReceivedCommand(data: data)
